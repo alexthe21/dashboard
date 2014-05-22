@@ -1,0 +1,42 @@
+<h1><?php $this->out($this->title) ?></h1>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper('UsersMenuHelper')->show(); ?>
+</div>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper(
+        'FormHelper',
+        array('action'      => '/users/addPlanDo/',
+              'id'          => 'fr1',
+              'method'      => 'post',
+              'buttonValue' => 'Crear Plan',
+              'controls'    => array(
+                  array(
+                      'field'   => 'id_plan',
+                      'type'    => 'number',
+                  ),
+                  array(
+                      'field'   => 'nombre_plan',
+                      'type'    => 'text',
+                  ),
+                  array(
+                      'field'   => 'fecha_inicio',
+                      'type'    => 'date',
+                      'value'   => $this->dates[0]->format('Y-m-d'),
+                  ),
+                  array(
+                      'field'   => 'fecha_final',
+                      'type'    => 'date',
+                      'value'   => $this->dates[1]->format('Y-m-d'),
+                  ),
+                  array(
+                      'field'   => 'objetivo',
+                      'type'    => 'number',
+                      'value'   => 10,
+                      'max'     => 100,
+                      'step'    => 0.01,
+                  ),
+              )
+        ))->show(); ?>
+</div>

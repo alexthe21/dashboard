@@ -1,0 +1,53 @@
+<div class="page-header">
+    <h1><?php $this->out($this->title);?></h1> 
+    <h1><small><?php echo $this->dates[0]->format('d/m/Y') . ' | ' 
+            . $this->dates[1]->format('d/m/Y'); ?></small></h1>
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+                        <?php for ($i = 0; $i < sizeof($this->data); $i++) {
+                            echo '[';
+                            for ($j = 0; $j < sizeof($this->data[$i]); $j++) {
+                                if ($i == 0) {
+                                    echo '"' . $this->data[$i][$j] . '"';
+                                } else {
+                                    if ($j == 0) {
+                                        echo '"' . $this->data[$i][$j] . '"';
+                                    } else {
+                                        echo $this->data[$i][$j];
+                                    }
+                                }
+                                if ($j < sizeof($this->data[$i]) - 1) {
+                                    echo ', ';
+                                }
+                            }
+                            if ($i < sizeof($this->data) - 1) {
+                                echo '],';
+                            } else {
+                                echo ']';
+                            }
+                        }
+                        echo ']);'?>
+
+        var options = {
+          title: "<?php echo 'Comparativa entre albaranes totales y los que tienen matrícula asignada'; ?>"
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("chart_div"));
+        chart.draw(data, options);
+      }
+</script>
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper('UsersMenuHelper')->show(); ?>
+</div>
+
+<div> 
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <div class="alert alert-info">
+        <?php echo 'Periodo de SMA de ' . $this->periodoSMA . ' día/s';?>
+    </div>
+</div>

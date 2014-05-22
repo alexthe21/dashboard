@@ -1,0 +1,46 @@
+<h1><?php echo 'Menú usuario' ?></h1>
+
+<?php echo $this->_viewHelperBroker->getHelper('UsersMenuHelper')->show(); ?>
+<?php foreach ($this->data as $data): ?>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><?php echo utf8_encode($data['name']) ?></div>
+            <div class="panel-body">
+                <p><?php echo utf8_encode($data['description']) ?></p>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><?php $this->out('Inicio'); ?></th>
+                        <th><?php $this->out('Final'); ?></th>
+                        <th><?php $this->out('Media'); ?></th>
+                        <th><?php $this->out('Objetivo'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data['lines'] as $line): ?>
+                        <tr>
+                            <td><?php $this->out($line['str_date']); ?></td>
+                            <td><?php $this->out($line['fin_date']); ?></td>
+                            <td><?php if ($line['rating'] > $line['goal']): ?>
+                                    <span class="label label-success">
+                                        <?php $this->out($line['rating']) ?>
+                                    </span>
+                                <?php elseif ($line['rating'] < $line['goal']): ?>
+                                    <span class="label label-danger">
+                                        <?php $this->out($line['rating']) ?>
+                                    </span>
+                                <?php elseif ($line['rating'] == $line['goal']): ?>
+                                    <span class="label label-warning">
+                                        <?php $this->out($line['rating']) ?>
+                                    </span>
+                                <?php endif; ?></td>
+                            <td><?php echo $this->out($line['goal'] . '%'); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php endforeach; ?>
+<div class="row"></div>

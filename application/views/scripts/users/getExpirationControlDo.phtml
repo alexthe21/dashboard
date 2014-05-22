@@ -1,0 +1,55 @@
+<div class="page-header">
+    <h1><?php $this->out($this->title); ?></h1> 
+    <h1><small><?php
+            echo $this->dates[0]->format('d/m/Y') . ' | '
+            . $this->dates[1]->format('d/m/Y');
+            ?></small></h1>
+</div>
+<?php echo $this->_viewHelperBroker->getHelper('UsersMenuHelper')->show(); ?>
+<div>
+    <table id="controlVencimientos" class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Cliente</th>
+                <th>Nombre</th>
+                <th>F. vencim</th>
+                <th>F. fact</th>
+                <th>Días vencim</th>
+                <th>Día pago</th>
+                <th>Dif. días</th>
+                <th>Días retraso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php for ($i = 0; $i < sizeof($this->data); $i++): ?>
+                <tr>
+                    <td><?php $this->out($this->data[$i]['ID_Numero']); ?></td>
+                    <td><?php $this->out($this->data[$i]['ID_Cliente']); ?></td>
+                    <td><?php $this->out($this->data[$i]['Nombre']); ?></td>
+                    <td><?php $this->out($this->data[$i]['Fecha_vencim']); ?></td>
+                    <td><?php $this->out($this->data[$i]['Fecha_fact']); ?></td>
+                    <td><?php $this->out($this->data[$i]['Dias_vencim']); ?></td>
+                    <td><?php $this->out($this->data[$i]['Dia_pago']); ?></td>
+                    <td><?php echo $this->data[$i]['Dif_dias']; ?></td>
+                    <td><?php if ($this->data[$i]['Dias_retraso'] == 0): ?>
+                            <span class="label label-success">
+                                <?php echo $this->data[$i]['Dias_retraso'] ?>
+                            </span>
+                        <?php elseif ($this->data[$i]['Dias_retraso'] > 30): ?>
+                            <span class="label label-danger">
+                                <?php echo $this->data[$i]['Dias_retraso'] ?>
+                            </span>
+                        <?php elseif ($this->data[$i]['Dias_retraso'] > 0): ?>
+                            <span class="label label-warning">
+                                <?php echo $this->data[$i]['Dias_retraso'] ?>
+                            </span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+    <a hidden id="send" href="" download=""></a>
+    <button type="button" id="gencsv" class="btn btn-primary">Descargar como CSV</button>
+</div>

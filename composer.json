@@ -1,0 +1,14 @@
+{
+    "name": "itrascastro/myownphpmvcframework.dev",
+    "authors": [
+        {
+            "name": "Ismael Trascastro",
+            "email": "i.trascastro@gmail.com",
+            "homepage": "http://itrascastro.github.io/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}

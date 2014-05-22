@@ -1,0 +1,27 @@
+<h1><?php $this->out($this->title) ?></h1>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper('UsersMenuHelper')->show(); ?>
+</div>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper(
+        'FormHelper',
+        array('action'      => '/users/getBirdsEyeViewDo/',
+              'id'          => 'fr1',
+              'method'      => 'get',
+              'buttonValue' => 'Enviar',
+              'controls'    => array(
+                  array(
+                      'field'   => 'fecha_inicial',
+                      'type'    => 'date',
+                      'value'   => $this->dates[0]->format('Y-m-d'),
+                  ),
+                  array(
+                      'field'   => 'fecha_final',
+                      'type'    => 'date',
+                      'value'   => $this->dates[1]->format('Y-m-d'),
+                  )
+              )
+        ))->show(); ?>
+</div>

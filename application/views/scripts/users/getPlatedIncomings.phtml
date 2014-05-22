@@ -1,0 +1,32 @@
+<h1><?php echo $this->title ?></h1>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper('UsersMenuHelper')->show(); ?>
+</div>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper(
+        'FormHelper',
+        array('action'      => '/users/getPlatedIncomingsDo/',
+              'id'          => 'fr1',
+              'method'      => 'get',
+              'buttonValue' => 'Enviar',
+              'controls'    => array(
+                  array(
+                      'field'   => 'fecha_inicial',
+                      'type'    => 'date',
+                      'value'   => $this->dates[0]->format('Y-m-d'),
+                  ),
+                  array(
+                      'field'   => 'fecha_final',
+                      'type'    => 'date',
+                      'value'   => $this->dates[1]->format('Y-m-d'),
+                  ),
+                  array(
+                      'field'   => 'periodo_sma',
+                      'type'    => 'number',
+                      'value'   => 5,
+                  )
+              )
+        ))->show(); ?>
+</div>

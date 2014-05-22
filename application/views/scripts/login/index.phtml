@@ -1,0 +1,21 @@
+<h1><?php $this->out($this->title) ?></h1>
+
+<div>
+    <?php echo $this->_viewHelperBroker->getHelper(
+        'FormHelper',
+        array('action'      => '/login/logInDo/',
+              'id'          => 'fr1',
+              'method'      => 'get',
+              'buttonValue' => 'login',
+              'controls'    => array(
+                  array(
+                      'field'   => 'usuario',
+                      'type'    => 'text',
+                  ),
+                  array(
+                      'field'   => 'password',
+                      'type'    => 'password',
+                  )
+              )
+        ))->show(); ?>
+</div>
